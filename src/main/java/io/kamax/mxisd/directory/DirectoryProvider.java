@@ -27,5 +27,9 @@ public interface DirectoryProvider {
     UserDirectorySearchResult searchByDisplayName(String query);
 
     UserDirectorySearchResult searchBy3pid(String query);
+    
+    UserDirectorySearchResult searchByDisplayNameGofast(String query, String accessToken);
+
+    UserDirectorySearchResult searchBy3pidGofast(String query, String accessToken);
 
 }

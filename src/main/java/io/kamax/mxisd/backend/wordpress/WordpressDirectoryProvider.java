@@ -103,5 +103,17 @@ public class WordpressDirectoryProvider implements DirectoryProvider {
         log.info("Searching users by 3PID using '{}'", searchTerm);
         return search(searchTerm, cfg.getSql().getQuery().getDirectory().get("threepid"));
     }
+    
+    @Override
+    public UserDirectorySearchResult searchByDisplayNameGofast(String searchTerm, String accessToken) {
+        log.info("Searching users by display name using '{}'", searchTerm);
+        return search(searchTerm, cfg.getSql().getQuery().getDirectory().get("name"));
+    }
+    
+    @Override
+    public UserDirectorySearchResult searchBy3pidGofast(String searchTerm, String accessToken) {
+        log.info("Searching users by 3PID using '{}'", searchTerm);
+        return search(searchTerm, cfg.getSql().getQuery().getDirectory().get("threepid"));
+    }
 
 }

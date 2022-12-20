@@ -83,5 +83,15 @@ public class ExecDirectoryStore extends ExecStore implements DirectoryProvider {
     public UserDirectorySearchResult searchBy3pid(String query) {
         return search(cfg.getSearch().getByName(), new UserDirectorySearchRequest("threepid", query));
     }
+    
+    @Override
+    public UserDirectorySearchResult searchByDisplayNameGofast(String query, String accessToken) {
+        return search(cfg.getSearch().getByName(), new UserDirectorySearchRequest("name", query));
+    }
+    
+    @Override
+    public UserDirectorySearchResult searchBy3pidGofast(String query, String accessToken) {
+        return search(cfg.getSearch().getByName(), new UserDirectorySearchRequest("threepid", query));
+    }
 
 }

@@ -112,5 +112,23 @@ public class LdapDirectoryProvider extends LdapBackend implements DirectoryProvi
         getCfg().getAttribute().getThreepid().forEach((k, v) -> attributes.addAll(v));
         return search(query, attributes);
     }
+    
+    @Override
+    public UserDirectorySearchResult searchByDisplayNameGofast(String query, String accessToken) {
+        log.info("Performing LDAP directory search on display name using '{}'", query);
+        List<String> attributes = new ArrayList<>();
+        attributes.add(getAt().getName());
+        attributes.addAll(getCfg().getDirectory().getAttribute().getOther());
+        return search(query, attributes);
+    }
+    
+    @Override
+    public UserDirectorySearchResult searchBy3pidGofast(String query, String accessToken) {
+        log.info("Performing LDAP directory search on 3PIDs using '{}'", query);
+        List<String> attributes = new ArrayList<>();
+        attributes.add(getAt().getName());
+        getCfg().getAttribute().getThreepid().forEach((k, v) -> attributes.addAll(v));
+        return search(query, attributes);
+    }
 
 }

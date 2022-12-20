@@ -113,7 +113,7 @@ public class DirectoryManager {
 
         for (DirectoryProvider provider : providers) {
             log.info("Using Directory provider {}", provider.getClass().getSimpleName());
-            UserDirectorySearchResult resultProvider = provider.searchByDisplayName(query);
+            UserDirectorySearchResult resultProvider = provider.searchByDisplayNameGofast(query, accessToken);
             log.info("Display name: found {} match(es) for '{}'", resultProvider.getResults().size(), query);
             result.getResults().addAll(resultProvider.getResults());
             if (resultProvider.isLimited()) {
@@ -123,7 +123,7 @@ public class DirectoryManager {
             if (cfg.getExclude().getThreepid()) {
                 log.info("Skipping 3PID data, disabled in config");
             } else {
-                resultProvider = provider.searchBy3pid(query);
+                resultProvider = provider.searchBy3pidGofast(query, accessToken);
                 log.info("Threepid: found {} match(es) for '{}'", resultProvider.getResults().size(), query);
                 result.getResults().addAll(resultProvider.getResults());
                 if (resultProvider.isLimited()) {

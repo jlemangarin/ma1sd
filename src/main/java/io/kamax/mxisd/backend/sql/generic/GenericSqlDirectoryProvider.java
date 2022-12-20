@@ -106,5 +106,17 @@ public class GenericSqlDirectoryProvider implements DirectoryProvider {
         log.info("Searching users by 3PID using '{}'", searchTerm);
         return search(searchTerm, cfg.getDirectory().getQuery().getThreepid());
     }
+    
+    @Override
+    public UserDirectorySearchResult searchByDisplayNameGofast(String searchTerm, String accessToken) {
+        log.info("Searching users by display name using '{}'", searchTerm);
+        return search(searchTerm, cfg.getDirectory().getQuery().getName());
+    }
+    
+    @Override
+    public UserDirectorySearchResult searchBy3pidGofast(String searchTerm, String accessToken) {
+        log.info("Searching users by 3PID using '{}'", searchTerm);
+        return search(searchTerm, cfg.getDirectory().getQuery().getThreepid());
+    }
 
 }

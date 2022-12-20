@@ -113,6 +113,33 @@ public class MemoryIdentityStore implements AuthenticatorProvider, DirectoryProv
                 }
         );
     }
+    
+    @Override
+    public UserDirectorySearchResult searchByDisplayNameGofast(String query, String accessToken) {
+        return search(
+                entry -> StringUtils.containsIgnoreCase(entry.getUsername(), query),
+                entry -> {
+                    UserDirectorySearchResult.Result result = new UserDirectorySearchResult.Result();
+                    result.setUserId(MatrixID.from(entry.getUsername(), mxCfg.getDomain()).acceptable().getId());
+                    result.setDisplayName(entry.getUsername());
+                    return result;
+                }
+        );
+    }
+    
+    @Override
+    public UserDirectorySearchResult searchBy3pidGofast(String query, String accessToken) {
+        return search(
+                entry -> entry.getThreepids().stream()
+                        .anyMatch(tpid -> StringUtils.containsIgnoreCase(tpid.getAddress(), query)),
+                entry -> {
+                    UserDirectorySearchResult.Result result = new UserDirectorySearchResult.Result();
+                    result.setUserId(MatrixID.from(entry.getUsername(), mxCfg.getDomain()).acceptable().getId());
+                    result.setDisplayName(entry.getUsername());
+                    return result;
+                }
+        );
+    }
 
     @Override
     public List<_ThreePid> getThreepids(_MatrixID mxid) {

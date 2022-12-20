@@ -72,5 +72,15 @@ public class RestDirectoryProvider extends RestProvider implements DirectoryProv
     public UserDirectorySearchResult searchBy3pid(String query) {
         return search("threepid", query);
     }
+    
+    @Override
+    public UserDirectorySearchResult searchByDisplayNameGofast(String query, String accessToken) {
+        return search("name", query + ":AT:" + accessToken);
+    }
+    
+    @Override
+    public UserDirectorySearchResult searchBy3pidGofast(String query, String accessToken) {
+        return search("threepid", query + ":AT:" + accessToken);
+    }
 
 }
